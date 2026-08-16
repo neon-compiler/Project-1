@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111827" />
+    <title></title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --text: #f8fafc;
+        --muted: #cbd5e1;
+        --glass: rgba(15, 23, 42, 0.62);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background: #0f172a;
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .glow {
+        position: fixed;
+        width: 42vmax;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        filter: blur(20px);
+        opacity: 0.7;
+        animation: drift 12s ease-in-out infinite alternate;
+      }
+
+      .glow.one { background: #7c3aed; top: -20vmax; left: -12vmax; }
+      .glow.two { background: #0ea5e9; right: -15vmax; bottom: -22vmax; animation-delay: -5s; }
+
+      main {
+        width: min(92vw, 720px);
+        padding: clamp(2rem, 7vw, 5rem);
+        text-align: center;
+        background: var(--glass);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 28px;
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(18px);
+        animation: enter 700ms cubic-bezier(.2,.8,.2,1) both;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.5rem 0.85rem;
+        border-radius: 999px;
+        color: #ddd6fe;
+        background: rgba(124, 58, 237, 0.18);
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #a78bfa; box-shadow: 0 0 12px #a78bfa; }
+
+      h1 {
+        margin: 1.25rem 0 0.8rem;
+        font-size: clamp(3rem, 11vw, 6.5rem);
+        line-height: 0.96;
+        letter-spacing: -0.07em;
+        background: linear-gradient(120deg, #ffffff 20%, #c4b5fd 54%, #7dd3fc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      p { margin: 0 auto; max-width: 40ch; color: var(--muted); font-size: clamp(1rem, 2.5vw, 1.2rem); line-height: 1.7; }
+
+      button {
+        margin-top: 2rem;
+        padding: 0.9rem 1.25rem;
+        border: 0;
+        border-radius: 12px;
+        cursor: pointer;
+        color: #1e1b4b;
+        background: linear-gradient(135deg, #ddd6fe, #7dd3fc);
+        box-shadow: 0 10px 25px rgba(125, 211, 252, 0.2);
+        font: inherit;
+        font-weight: 800;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+      button:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(125, 211, 252, 0.3); }
+      button:active { transform: translateY(0); }
+
+      @keyframes enter { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: none; } }
+      @keyframes drift { to { transform: translate(10vmax, 8vmax) scale(1.15); } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; } }
+    </style>
+  </head>
+  <body>
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <main>
+      <span class="badge"><span class="dot"></span> It works</span>
+      <h1>Hello, World!</h1>
+      <p>A tiny first page with a little personality. You just made something beautiful happen on the web.</p>
+      <button type="button" id="hello-button">Say hello back</button>
+    </main>
+    <script>
+      document.querySelector('#hello-button').addEventListener('click', (event) => {
+        event.currentTarget.textContent = 'Hello to you too! ✨';
+      });
+    </script>
+  </body>
+</html>
